@@ -1,0 +1,25 @@
+{
+  "name": "stl-models",
+  "version": "0.1.0",
+  "description": "Collection of various STL-models for testing purposes",
+  "main": "README.md",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lowfab/stl-models.git"
+  },
+  "keywords": [
+    "stl"
+  ],
+  "author": "HCI bachelor-project 2014/2015 at the HPI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lowfab/models/issues"
+  },
+  "homepage": "https://github.com/Lowfab/stl-models",
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
