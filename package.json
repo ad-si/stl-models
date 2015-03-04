@@ -1,6 +1,6 @@
 {
   "name": "stl-models",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Collection of various STL-models for testing purposes",
   "main": "README.md",
   "scripts": {
