@@ -19,7 +19,7 @@ getAbsolutePaths = ->
 		finder.on 'directory', (directory, stat, stop) ->
 			base = path.basename directory
 
-			if base is '.git' or base is 'node_modules'
+			if base in [ 'node_modules', '.git', 'source', 'test']
 				stop()
 
 		finder.on 'file', (file) ->
@@ -29,15 +29,18 @@ getAbsolutePaths = ->
 		finder.on 'end', ->
 			resolve files
 
+
 getPaths = () ->
 	return getAbsolutePaths().then (paths) ->
 		paths.map (filePath) ->
 			filePath.substr rootPath.length + 1
 
+
 getNames = () ->
 	return getAbsolutePaths().then (paths) ->
 		paths.map (filePath) ->
 			path.basename filePath
+
 
 getByPath = (filePath) ->
 	return new Promise (resolve, reject) ->
