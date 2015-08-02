@@ -46,13 +46,13 @@ describe 'STL Models', () ->
 				done()
 		)
 
-	it "All .ascii.stl files start with 'solid'", ->
+	it 'All .ascii.stl files start with "solid"', ->
 		testedFiles
 			.filter (file) -> /.*ascii\.stl/.test file.name
 			.forEach (file) ->
 				assert file.startsWithSolid
 
-	it "All .bin.stl files do not start with 'solid'", ->
+	it 'All .bin.stl files do not start with "solid"', ->
 		testedFiles
 			.filter (file) ->
 				/.*bin\.stl/.test file.name and
