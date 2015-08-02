@@ -50,7 +50,7 @@ describe 'STL Models', () ->
 		testedFiles
 			.filter (file) -> /.*ascii\.stl/.test file.name
 			.forEach (file) ->
-				assert file.startsWithSolid
+				assert file.startsWithSolid, file.name
 
 	it 'All .bin.stl files do not start with "solid"', ->
 		testedFiles
