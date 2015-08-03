@@ -5,6 +5,8 @@ readdirp = require 'readdirp'
 
 stlModels = require '../source/index'
 numberOfModels = 35
+rootPath = path.resolve  __dirname, '..'
+
 
 checkLength = (models) ->
 	assert.equal models.length, numberOfModels
@@ -21,7 +23,7 @@ describe 'STL Models', () ->
 
 		readdirp(
 			{
-				root: path.resolve  __dirname, '..'
+				root: rootPath
 				fileFilter: '*.stl'
 			}
 			() -> # Do nothing
@@ -95,3 +97,21 @@ describe 'STL Models', () ->
 			.getByPath 'polytopes/tetrahedron.ascii.stl'
 			.then (contentBuffer) ->
 				/^solid tetrahedron/.test contentBuffer
+
+	it 'Returns a readable STL stream', (done) ->
+		relativePath = 'polytopes/tetrahedron.ascii.stl'
+		tempFilePath = path.join __dirname, 'temp.stl'
+		writeStream = fs.createWriteStream tempFilePath
+
+		stlModels
+			.getReadStreamByPath relativePath
+			.pipe writeStream
+
+		writeStream.on 'error', -> done
+		writeStream.on 'finish', ->
+			assert.equal(
+				String fs.readFileSync path.join rootPath, relativePath
+				String fs.readFileSync tempFilePath
+			)
+			fs.unlinkSync tempFilePath
+			done()

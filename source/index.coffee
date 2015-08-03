@@ -46,7 +46,12 @@ getByPath = (filePath) ->
 		)
 
 
+getReadStreamByPath = (filePath) ->
+	return fs.createReadStream path.join rootPath, filePath
+
+
 module.exports = {
 	getObjects
 	getByPath
+	getReadStreamByPath
 }
