@@ -24,6 +24,10 @@ stlModels
 stlModels
 	.getByPath('polytopes/tetrahedron.ascii.stl')
 	.then console.log
+
+stlModels
+	.getReadStreamByPath('polytopes/tetrahedron.ascii.stl')
+	.pipe fs.createWriteStream('path/to/file')
 ```
 
 
