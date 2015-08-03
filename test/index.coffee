@@ -12,7 +12,7 @@ checkLength = (models) ->
 	assert.equal models.length, numberOfModels
 
 runTest = (file) ->
-		assert file.startsWithSolid
+	assert file.startsWithSolid
 
 
 describe 'STL Models', () ->
@@ -54,11 +54,13 @@ describe 'STL Models', () ->
 				done()
 		)
 
+
 	it 'All .ascii.stl files start with "solid"', ->
 		testedFiles
 			.filter (file) -> /.*ascii\.stl/.test file.name
 			.forEach (file) ->
 				assert file.startsWithSolid, file.name
+
 
 	it 'All .bin.stl files do not start with "solid"', ->
 		testedFiles
@@ -71,6 +73,7 @@ describe 'STL Models', () ->
 					false
 					"File #{file.name} should not start with 'solid'"
 				)
+
 
 	it 'Returns a promise which resolves to a list of STL model objects', () ->
 		return stlModels
@@ -91,12 +94,14 @@ describe 'STL Models', () ->
 					models[0].absolutePath + ' is no absolute path'
 				)
 
+
 	it 'Returns a promise
 		which resolves to the file content of an STL model', () ->
 		return stlModels
 			.getByPath 'polytopes/tetrahedron.ascii.stl'
 			.then (contentBuffer) ->
 				/^solid tetrahedron/.test contentBuffer
+
 
 	it 'Returns a readable STL stream', (done) ->
 		relativePath = 'polytopes/tetrahedron.ascii.stl'
