@@ -2,9 +2,11 @@
   "name": "stl-models",
   "version": "0.10.0",
   "description": "Collection of various STL-models for testing purposes",
-  "main": "source/index.coffee",
+  "main": "build/index.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register test/index.coffee"
+    "test": "mocha --compilers coffee:coffee-script/register test/index.coffee",
+    "build": "coffee --compile --output build source",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
