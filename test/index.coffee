@@ -70,24 +70,27 @@ describe 'STL Models', () ->
 					"File #{file.name} should not start with 'solid'"
 				)
 
-	it 'Returns a promise
-		which resolves to the absolute paths of the stl-models', () ->
+	it 'Returns a promise which resolves to a list of STL model objects', () ->
 		return stlModels
-			.getAbsolutePaths()
-			.then checkLength
+			.getObjects()
+			.then (models) ->
+
+				absolutePath = models[0].absolutePath
+				relativePath = models[0].absolutePath
+
+				checkLength models
+				assert models[0].filename
+				assert(
+					relativePath
+					models[0].relativePath + ' is no relative path'
+				)
+				assert(
+					absolutePath && absolutePath[0] is '/'
+					models[0].absolutePath + ' is no absolute path'
+				)
 
 	it 'Returns a promise
-		which resolves to the relative paths of the stl-models', () ->
-		return stlModels
-			.getPaths()
-			.then checkLength
-
-	it 'Returns a promise which resolves to the names of the stl-models', () ->
-		return stlModels
-			.getNames()
-			.then checkLength
-
-	it 'Returns a promise which resolves to the stl-model', () ->
+		which resolves to the file content of an STL model', () ->
 		return stlModels
 			.getByPath 'polytopes/tetrahedron.ascii.stl'
 			.then (contentBuffer) ->

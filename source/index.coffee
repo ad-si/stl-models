@@ -7,7 +7,7 @@ findit = require 'findit2'
 rootPath = path.resolve __dirname, '..'
 
 
-getAbsolutePaths = ->
+getObjects = ->
 	return new Promise (resolve, reject) ->
 
 		finder = findit rootPath
@@ -19,27 +19,19 @@ getAbsolutePaths = ->
 		finder.on 'directory', (directory, stat, stop) ->
 			base = path.basename directory
 
-			if base in [ 'node_modules', '.git', 'source', 'test']
+			if base in ['node_modules', '.git', 'source', 'test']
 				stop()
 
 		finder.on 'file', (file) ->
 			if /stl$/.test file
-				files.push file
+				files.push {
+					filename: path.basename file
+					absolutePath: file
+					relativePath: file.substr rootPath.length + 1
+				}
 
 		finder.on 'end', ->
 			resolve files
-
-
-getPaths = () ->
-	return getAbsolutePaths().then (paths) ->
-		paths.map (filePath) ->
-			filePath.substr rootPath.length + 1
-
-
-getNames = () ->
-	return getAbsolutePaths().then (paths) ->
-		paths.map (filePath) ->
-			path.basename filePath
 
 
 getByPath = (filePath) ->
@@ -55,8 +47,6 @@ getByPath = (filePath) ->
 
 
 module.exports = {
-	getAbsolutePaths
-	getPaths
-	getNames
+	getObjects
 	getByPath
 }
