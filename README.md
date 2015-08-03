@@ -5,11 +5,33 @@ All models exist (if possible) in an ascii and and binary version.
 Some also exist as minified ascii-version where all unnecessary whitespace is removed.
 
 
+## Installation
+
+```sh
+npm install --save stl-models
+```
+
+
+## Usage
+
+```js
+var stlModels = require('stl-models')
+
+stlModels
+	.getObjects()
+	.then console.log
+
+stlModels
+	.getByPath('polytopes/tetrahedron.ascii.stl')
+	.then console.log
+```
+
+
 ## Models
 
 ### Objects
 
-Larger objects for testing of general functionality and performance testing. 
+Larger objects for testing of general functionality and performance testing.
 
 - bunny - Stanford bunny
 - gearwheel - Gearwheel with 40 teeth
