@@ -1,7 +1,5 @@
 fs = require 'fs'
 path = require 'path'
-
-Promise = require('es6-promise').Promise
 findit = require 'findit2'
 
 rootPath = path.resolve __dirname, '..'
