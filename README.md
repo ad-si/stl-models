@@ -69,3 +69,10 @@ Simple polytopes for feature testing
 - wrongHeader.bin - Header starts with "solid". This is normally reserved for ascii files only.
 - wrongNormal.ascii - Model has 1 incorrect normal
 - wrongNormals.ascii - Model has several incorrect normals
+
+
+## Related
+
+- [redwood-data 3dscan] - Dataset of more than ten thousand 3D scans of real objects.
+
+[redwood-data 3dscan]: http://redwood-data.org/3dscan
