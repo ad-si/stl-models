@@ -14,9 +14,9 @@ npm install --save stl-models
 
 ## Usage
 
-```js
-var fs = require('fs')
-var stlModels = require('stl-models')
+```ts
+import * as fs from 'fs'
+import * as stlModels from 'stl-models'
 
 stlModels
 	.getObjects()

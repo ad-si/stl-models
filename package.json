@@ -3,9 +3,10 @@
   "version": "0.12.0",
   "description": "Collection of various STL-models for testing purposes",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register test/index.coffee",
-    "build": "coffee --compile --output build source",
+    "test": "TS_NODE_PROJECT=tsconfig.test.json mocha --require ts-node/register test/index.ts",
+    "build": "tsc",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -22,11 +23,14 @@
   },
   "homepage": "https://github.com/Lowfab/stl-models",
   "dependencies": {
-    "coffee-script": "^1.10.0",
     "findit2": "^2.2.3"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.6.0",
     "mocha": "^2.4.5",
-    "readdirp": "^2.0.0"
+    "readdirp": "^2.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
   }
 }
