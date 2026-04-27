@@ -15,19 +15,20 @@ npm install --save stl-models
 ## Usage
 
 ```js
+var fs = require('fs')
 var stlModels = require('stl-models')
 
 stlModels
 	.getObjects()
-	.then console.log
+	.then(console.log)
 
 stlModels
 	.getByPath('polytopes/tetrahedron.ascii.stl')
-	.then console.log
+	.then(console.log)
 
 stlModels
 	.getReadStreamByPath('polytopes/tetrahedron.ascii.stl')
-	.pipe fs.createWriteStream('path/to/file')
+	.pipe(fs.createWriteStream('path/to/file'))
 ```
 
 
