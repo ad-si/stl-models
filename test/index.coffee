@@ -120,3 +120,51 @@ describe 'STL Models', () ->
 			)
 			fs.unlinkSync tempFilePath
 			done()
+
+
+	it 'getByPath rejects when the path does not exist', ->
+		return stlModels
+			.getByPath 'polytopes/does-not-exist.stl'
+			.then(
+				-> throw new Error 'Expected promise to be rejected'
+				(error) -> assert /Invalid path/.test error.message
+			)
+
+
+	it 'getByPath rejects when the path escapes the package', ->
+		return stlModels
+			.getByPath '../etc/passwd'
+			.then(
+				-> throw new Error 'Expected promise to be rejected'
+				(error) -> assert /Invalid path/.test error.message
+			)
+
+
+	it 'getByPath rejects when the path is empty', ->
+		return stlModels
+			.getByPath ''
+			.then(
+				-> throw new Error 'Expected promise to be rejected'
+				(error) -> assert /Invalid path/.test error.message
+			)
+
+
+	it 'getReadStreamByPath throws when the path does not exist', ->
+		assert.throws(
+			-> stlModels.getReadStreamByPath 'polytopes/does-not-exist.stl'
+			/Invalid path/
+		)
+
+
+	it 'getReadStreamByPath throws when the path escapes the package', ->
+		assert.throws(
+			-> stlModels.getReadStreamByPath '../etc/passwd'
+			/Invalid path/
+		)
+
+
+	it 'getReadStreamByPath throws when the path is empty', ->
+		assert.throws(
+			-> stlModels.getReadStreamByPath ''
+			/Invalid path/
+		)

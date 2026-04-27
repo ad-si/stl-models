@@ -5,6 +5,21 @@ findit = require 'findit2'
 rootPath = path.resolve __dirname, '..'
 
 
+validatePath = (filePath) ->
+	if typeof filePath isnt 'string' or filePath.length is 0
+		throw new Error "Invalid path: path must be a non-empty string"
+
+	absolutePath = path.resolve rootPath, filePath
+
+	if absolutePath.indexOf(rootPath + path.sep) isnt 0
+		throw new Error "Invalid path: \"#{filePath}\" is outside of the package"
+
+	if not fs.existsSync absolutePath
+		throw new Error "Invalid path: \"#{filePath}\" does not exist"
+
+	return absolutePath
+
+
 getObjects = ->
 	return new Promise (resolve, reject) ->
 
@@ -34,8 +49,14 @@ getObjects = ->
 
 getByPath = (filePath) ->
 	return new Promise (resolve, reject) ->
+		try
+			absolutePath = validatePath filePath
+		catch error
+			reject error
+			return
+
 		fs.readFile(
-			path.join(rootPath, filePath),
+			absolutePath,
 			(error, fileContent) ->
 				if error
 					reject error
@@ -45,7 +66,8 @@ getByPath = (filePath) ->
 
 
 getReadStreamByPath = (filePath) ->
-	return fs.createReadStream path.join rootPath, filePath
+	absolutePath = validatePath filePath
+	return fs.createReadStream absolutePath
 
 
 module.exports = {
